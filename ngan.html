@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>Shop Mỹ Phẩm - Shopee Style</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      background: #f5f5f5;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar {
+      background: linear-gradient(90deg, #ff5722 0%, #ff8a65 100%);
+      box-shadow: 0 2px 8px #d6338440;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar h1 {
+      color: #fff;
+      font-size: 28px;
+      margin: 0;
+      font-weight: bold;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .navbar h1 i {
+      color: #fff;
+      font-size: 32px;
+    }
+    .navbar .search-bar {
+      flex: 1;
+      margin: 0 32px;
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border-radius: 8px;
+      padding: 4px 8px;
+    }
+    .navbar input[type="text"] {
+      width: 300px;
+      padding: 8px;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+      outline: none;
+      background: transparent;
+      color: #333;
+    }
+    .navbar button {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      background: #ff5722;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      margin-left: 8px;
+      transition: background 0.2s;
+    }
+    .navbar button:hover {
+      background: #d63384;
+    }
+    .navbar .user {
+      font-size: 16px;
+      color: #fff;
+      margin-right: 16px;
+    }
+    .cart-icon {
+      position: relative;
+      margin-left: 24px;
+      cursor: pointer;
+      color: #fff;
+      font-size: 28px;
+      transition: color 0.2s;
+    }
+    .cart-icon:hover {
+      color: #d63384;
+    }
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -12px;
+      background: #d63384;
+      color: #fff;
+      border-radius: 50%;
+      padding: 2px 7px;
+      font-size: 13px;
+      font-weight: bold;
+      border: 2px solid #fff;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 32px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #d6338440;
+      padding: 32px;
+      min-height: 600px;
+    }
+    .banner {
+      width: 100%;
+      height: 120px;
+      background: url('https://cf.shopee.vn/file/vn-50009109-7e4e2b6e7b6e7b6e7b6e7b6e7b6e7b6e') center/cover no-repeat;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 32px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 8px #d63384;
+      position: relative;
+      overflow: hidden;
+    }
+    .banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #ff5722cc 0%, #ff8a65cc 100%);
+      opacity: 0.7;
+      border-radius: 12px;
+    }
+    .banner span {
+      position: relative;
+      z-index: 1;
+    }
+    .filter-bar {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+      background: #fff0f6;
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+    .filter-bar select, .filter-bar input {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid #d63384;
+      font-size: 15px;
+      background: #fff;
+      color: #ad1457;
+    }
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #d6338440;
+      padding: 16px;
+      text-align: center;
+      transition: box-shadow 0.2s, transform 0.2s;
+      position: relative;
+      border: 1px solid #ffe4ef;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      box-shadow: 0 4px 16px #d6338440;
+      transform: translateY(-4px) scale(1.03);
+      border-color: #ff5722;
+    }
+    .product-card img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      background: #fff;
+      box-shadow: 0 2px 8px #d6338440;
+      border: 1px solid #ffe4ef;
+    }
+    .product-card .product-name {
+      font-weight: bold;
+      color: #d63384;
+      font-size: 18px;
+      margin-bottom: 6px;
+      min-height: 24px;
+    }
+    .product-card .product-price {
+      color: #ff5722;
+      font-size: 16px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    .product-card .star {
+      color: #ffcc00;
+      font-size: 18px;
+      margin: 0 1px;
+      cursor: pointer;
+    }
+    .product-card .stock {
+      color: #ad1457;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .product-card button {
+      background: linear-gradient(90deg, #ff5722 0%, #d63384 100%);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-size: 15px;
+      margin-top: 8px;
+      font-weight: bold;
+      box-shadow: 0 2px 8px #d6338440;
+      transition: background 0.2s;
+    }
+    .product-card button:disabled {
+      background: #ccc;
+      color: #fff;
+      cursor: not-allowed;
+    }
+    .product-card button:hover:not(:disabled) {
+      background: #ad1457;
+    }
+    .cart {
+      background: #fff0f6;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #d6338440;
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+    .cart h2 {
+      color: #d63384;
+      margin-top: 0;
+      font-size: 22px;
+    }
+    .cart-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 16px 0;
+    }
+    .cart-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #ffe4ef;
+      font-size: 15px;
+      color: #ad1457;
+    }
+    .cart-list img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 12px;
+      border: 1px solid #ffe4ef;
+    }
+    .cart-total {
+      font-weight: bold;
+      color: #ff5722;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+    .cart button {
+      background: linear-gradient(90deg, #ff5722 0%, #d63384 100%);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 24px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      box-shadow: 0 2px 8px #d6338440;
+      transition: background 0.2s;
+    }
+    .cart button:hover {
+      background: #d63384;
+    }
+    .service-btns {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      justify-content: center;
+    }
+    .service-btns button {
+      background: linear-gradient(90deg, #ff5722 0%, #d63384 100%);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 20px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+      box-shadow: 0 2px 8px #d6338440;
+      transition: background 0.2s;
+    }
+    .service-btns button:hover {
+      background: #ad1457;
+    }
+    .service-form {
+      background: #fff0f6;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #d6338440;
+      padding: 24px;
+      margin-bottom: 24px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .service-form label {
+      font-weight: bold;
+      margin-bottom: 8px;
+      display: block;
+      color: #d63384;
+    }
+    .service-form input, .service-form select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border-radius: 6px;
+      border: 1px solid #d63384;
+      font-size: 15px;
+      background: #fff;
+      color: #ad1457;
+    }
+    .service-form button {
+      background: linear-gradient(90deg, #ff5722 0%, #d63384 100%);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 20px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+      box-shadow: 0 2px 8px #d6338440;
+      transition: background 0.2s;
+    }
+    .service-form button:hover {
+      background: #ad1457;
+    }
+    #welcome {
+      margin-bottom: 16px;
+      font-weight: bold;
+      color: #ad1457;
+      text-align: right;
+    }
+    #userInfo {
+      display:none;
+      margin-bottom:16px;
+      background:#fff0f6;
+      padding:12px;
+      border-radius:8px;
+      box-shadow:0 2px 8px #d6338440;
+      color:#ad1457;
+      text-align: left;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #userInfo img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 8px;
+      background: #fff;
+      border: 1px solid #ffe4ef;
+    }
+    .logout-btn {
+      background: linear-gradient(90deg, #ff5722 0%, #d63384 100%);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 16px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-left: 12px;
+      font-weight: bold;
+      box-shadow: 0 2px 8px #d6338440;
+      transition: background 0.2s;
+    }
+    .logout-btn:hover {
+      background: #ad1457;
+    }
+    .toast {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      background: #ff5722;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      box-shadow: 0 2px 8px #d6338440;
+      z-index: 9999;
+      display: none;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 400px;
+      margin: auto;
+      position: relative;
+      text-align: center;
+      box-shadow: 0 2px 8px #d6338440;
+    }
+    .modal-content img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      border: 1px solid #ffe4ef;
+    }
+    .close-modal {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      font-size: 22px;
+      color: #ad1457;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .history {
+      background: #fff0f6;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #d6338440;
+      padding: 24px;
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .history h2 {
+      color: #d63384;
+      margin-top: 0;
+      font-size: 20px;
+    }
+    .history-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .history-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid #ffe4ef;
+      font-size: 15px;
+      color: #ad1457;
+    }
+    @keyframes fadein {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeout {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+    @media (max-width: 700px) {
+      .container { padding: 4px; }
+      .navbar { flex-direction: column; height: auto; padding: 8px 0; }
+      .navbar .search-bar { margin: 12px 0; width: 100%; }
+      .navbar input[type="text"] { width: 100%; }
+      .product-list { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .banner { font-size: 20px; height: 80px; }
+      .cart, .service-form, .history { padding: 8px; }
+      .product-card img { width: 90px; height: 90px; }
+      .product-card { padding: 8px; }
+      .modal-content { padding: 8px; }
+      .cart-list li { font-size: 13px; }
+    }
+    @media (max-width: 500px) {
+      .container { padding: 2px; }
+      .navbar { flex-direction: column; height: auto; padding: 4px 0; }
+      .navbar .search-bar { margin: 8px 0; width: 100%; flex-wrap: wrap; }
+      .navbar input[type="text"] { width: 100%; margin-bottom: 4px; }
+      .product-list { grid-template-columns: 1fr; gap: 8px; }
+      .banner { font-size: 16px; height: 60px; }
+      .cart, .service-form, .history { padding: 4px; }
+      .product-card img { width: 70px; height: 70px; }
+      .product-card { padding: 4px; font-size: 13px; }
+      .modal-content { padding: 4px; }
+      .cart-list li { font-size: 12px; }
+      .service-btns { flex-direction: column; gap: 8px; }
+    }
+    /* Thêm thông báo realtime khi có khuyến mãi hoặc đơn hàng thay đổi trạng thái */
+    #notificationBar {
+      display:none;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      z-index:99999;
+      background:#ffcc00;
+      color:#ad1457;
+      text-align:center;
+      padding:12px;
+      font-weight:bold;
+      box-shadow:0 2px 8px #d6338440;
+    }
+  </style>
+  <script>
+    let users = [];
+    let loggedInUser = null;
+    let cart = [];
+    let history = [];
+    let productRatings = {};
+    let productComments = {};
+
+    // Danh sách sản phẩm, hình ảnh và giá tiền (hình ảnh phù hợp từng loại)
+    const products = [
+      {
+        name: "Son môi",
+        img: "https://cdn.pixabay.com/photo/2016/11/29/05/08/lipstick-1869238_1280.jpg",
+        price: 150000,
+        type: "Trang điểm",
+        desc: "Son môi cao cấp, màu sắc tươi tắn, lâu trôi."
+      },
+      {
+        name: "Kem dưỡng",
+        img: "https://cdn.pixabay.com/photo/2017/08/07/00/32/moisturizer-2596083_1280.jpg",
+        price: 220000,
+        type: "Chăm sóc da",
+        desc: "Kem dưỡng ẩm giúp da mềm mịn, trắng sáng."
+      },
+      {
+        name: "Mặt nạ",
+        img: "https://cdn.pixabay.com/photo/2017/08/07/00/32/facemask-2596082_1280.jpg",
+        price: 35000,
+        type: "Chăm sóc da",
+        desc: "Mặt nạ dưỡng da, cấp ẩm và làm dịu da."
+      },
+      {
+        name: "Phấn phủ",
+        img: "https://cdn.pixabay.com/photo/2016/11/29/05/08/powder-1869237_1280.jpg",
+        price: 180000,
+        type: "Trang điểm",
+        desc: "Phấn phủ mịn, kiểm soát dầu, giữ lớp nền lâu trôi."
+      },
+      {
+        name: "Sữa rửa mặt",
+        img: "https://cdn.pixabay.com/photo/2017/08/07/00/32/cleanser-2596084_1280.jpg",
+        price: 95000,
+        type: "Chăm sóc da",
+        desc: "Sữa rửa mặt dịu nhẹ, làm sạch sâu, không khô da."
+      },
+      {
+        name: "Tẩy trang",
+        img: "https://cdn.pixabay.com/photo/2017/08/07/00/32/makeup-remover-2596085_1280.jpg",
+        price: 120000,
+        type: "Chăm sóc da",
+        desc: "Nước tẩy trang sạch sâu, không gây kích ứng."
+      },
+      {
+        name: "Kem chống nắng",
+        img: "https://cdn.pixabay.com/photo/2017/08/07/00/32/sunscreen-2596086_1280.jpg",
+        price: 210000,
+        type: "Chăm sóc da",
+        desc: "Kem chống nắng SPF50+, bảo vệ da khỏi tia UV."
+      },
+      {
+        name: "Serum",
+        img: "https://cdn.pixabay.com/photo/2017/08/07/00/32/serum-2596087_1280.jpg",
+        price: 250000,
+        type: "Chăm sóc da",
+        desc: "Serum dưỡng da, chống lão hóa, phục hồi da."
+      }
+    ];
+
+    function showRegister() {
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('registerForm').style.display = 'block';
+    }
+
+    function showLogin() {
+      document.getElementById('registerForm').style.display = 'none';
+      document.getElementById('loginForm').style.display = 'block';
+    }
+
+    function registerAccount() {
+      const username = document.getElementById('regUsername').value.trim();
+      const password = document.getElementById('regPassword').value;
+      if (!username || !password) {
+        alert('Vui lòng nhập đầy đủ thông tin!');
+        return;
+      }
+      if (users.find(u => u.username === username)) {
+        alert('Tên tài khoản đã tồn tại!');
+        return;
+      }
+      users.push({ username, password, avatar: "", bg: "", history: [] });
+      alert('Đăng ký thành công! Bạn có thể đăng nhập.');
+      showLogin();
+    }
+
+    function loginAccount() {
+      const username = document.getElementById('loginUsername').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const welcome = document.getElementById('welcome');
+      if (!username || !password) {
+        alert('Vui lòng nhập đầy đủ thông tin!');
+        return;
+      }
+      const user = users.find(u => u.username === username && u.password === password);
+      if (!user) {
+        alert('Sai tài khoản hoặc mật khẩu!');
+        return;
+      }
+      loggedInUser = username;
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('registerForm').style.display = 'none';
+      welcome.innerHTML = 'Xin chào, ' + username + ' <button class="logout-btn" onclick="logout()">Đăng xuất</button>';
+      document.getElementById('mainContent').style.display = 'block';
+      showUserInfo();
+      renderProducts();
+      renderCart();
+      renderHistory();
+      updateCartIcon();
+      if (user.bg) {
+        document.body.style.background = `url('${user.bg}') no-repeat center center fixed`;
+        document.body.style.backgroundSize = 'cover';
+      }
+    }
+
+    function logout() {
+      loggedInUser = null;
+      document.getElementById('mainContent').style.display = 'none';
+      document.getElementById('userInfo').style.display = 'none';
+      document.getElementById('welcome').textContent = '';
+      document.getElementById('loginForm').style.display = 'block';
+      cart = [];
+      updateCartIcon();
+      document.body.style.background = "url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=800&q=80') no-repeat center center fixed";
+      document.body.style.backgroundSize = 'cover';
+    }
+
+    function showUserInfo() {
+      const user = users.find(u => u.username === loggedInUser);
+      document.getElementById('userInfo').style.display = 'block';
+      document.getElementById('infoUsername').textContent = user.username;
+      if (user.avatar) {
+        document.getElementById('infoAvatar').src = user.avatar;
+        document.getElementById('infoAvatar').style.display = 'block';
+      } else {
+        document.getElementById('infoAvatar').style.display = 'none';
+      }
+    }
+
+    function updateBg(event) {
+      const file = event.target.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.body.style.background = `url('${e.target.result}') no-repeat center center fixed`;
+          document.body.style.backgroundSize = 'cover';
+          const user = users.find(u => u.username === loggedInUser);
+          user.bg = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function updateAvatar(event) {
+      const file = event.target.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const user = users.find(u => u.username === loggedInUser);
+          user.avatar = e.target.result;
+          showUserInfo();
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Quản lý kho nâng cấp: cảnh báo khi sản phẩm sắp hết hàng, tự động ẩn khi hết hàng
+
+    // Số lượng cảnh báo hết hàng
+    const STOCK_WARNING = 3;
+
+    // Sửa lại hàm renderProducts để hiển thị cảnh báo và ẩn sản phẩm hết hàng
+    function renderProducts(filter = "", type = "", price = "") {
+      const list = document.getElementById('productList');
+      let filtered = products;
+      if (filter) {
+        filtered = filtered.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()));
+      }
+      if (type) {
+        filtered = filtered.filter(p => p.type === type);
+      }
+      if (price) {
+        if (price === "1") filtered = filtered.filter(p => p.price < 100000);
+        if (price === "2") filtered = filtered.filter(p => p.price >= 100000 && p.price < 200000);
+        if (price === "3") filtered = filtered.filter(p => p.price >= 200000);
+      }
+      filtered = filtered.filter(product => stock[product.name] > 0);
+
+      // Lấy danh sách yêu thích của user
+      const favs = userFavorites[loggedInUser] || [];
+
+      list.innerHTML = filtered.map(product => {
+        const ratingArr = productRatings[product.name] || [];
+        const rating = ratingArr.length ? Math.round(ratingArr.reduce((a,b)=>a+b,0)/ratingArr.length) : 0;
+        let stockMsg = "";
+        if (stock[product.name] <= STOCK_WARNING) {
+          stockMsg = `<span style="color:#ff5722;font-weight:bold;">Sắp hết hàng!</span>`;
+        }
+        const isFav = favs.includes(product.name);
+        return `
+        <div class="product-card">
+          <img src="${product.img}" alt="${product.name}" onclick="showDetail('${product.name}')">
+          <div class="product-name">${product.name}</div>
+          <div class="product-price">${product.price.toLocaleString()} VNĐ</div>
+          <div class="stock">Số lượng còn: ${stock[product.name]} ${stockMsg}</div>
+          <div>
+            ${[1,2,3,4,5].map(i => `<span class="star" onclick="rateProduct('${product.name}',${i})">${i <= rating ? "★" : "☆"}</span>`).join('')}
+          </div>
+          <button onclick="addToCart('${product.name}')" ${stock[product.name] === 0 ? "disabled style='background:#ccc;'" : ""}>Thêm vào giỏ</button>
+          <button onclick="toggleFavorite('${product.name}')" style="background:${isFav ? '#ffcc00' : '#ffe4ef'};color:${isFav ? '#ad1457' : '#d63384'};margin-top:6px;">
+            <i class="fa fa-heart"></i> ${isFav ? 'Bỏ yêu thích' : 'Yêu thích'}
+          </button>
+        </div>
+      `}).join('');
+    }
+
+    function addToCart(productName) {
+      const product = products.find(p => p.name === productName);
+      const item = cart.find(i => i.name === productName);
+      let qty = 1;
+      let inputQty = prompt("Nhập số lượng muốn mua:", "1");
+      if (inputQty && !isNaN(inputQty) && Number(inputQty) > 0) {
+        qty = Number(inputQty);
+      }
+      if (stock[productName] < qty) {
+        showToast("Sản phẩm đã hết hàng hoặc không đủ số lượng!");
+        return;
+      }
+      stock[productName] -= qty;
+      if (item) {
+        item.qty += qty;
+      } else {
+        cart.push({ name: product.name, img: product.img, price: product.price, qty });
+      }
+      renderProducts(); // cập nhật lại danh sách sản phẩm
+      renderCart();
+      updateCartIcon();
+      showToast("Đã thêm vào giỏ hàng!");
+    }
+
+    function removeFromCart(productName) {
+      cart = cart.filter(i => i.name !== productName);
+      renderCart();
+      updateCartIcon();
+    }
+
+    function renderCart() {
+      const cartList = document.getElementById('cartList');
+      const cartTotal = document.getElementById('cartTotal');
+      if (cart.length === 0) {
+        cartList.innerHTML = '<li>Giỏ hàng trống.</li>';
+        cartTotal.textContent = '';
+        return;
+      }
+      let total = 0;
+      cartList.innerHTML = cart.map(item => {
+        total += item.price * item.qty;
+        return `
+          <li>
+            <img src="${item.img}" alt="${item.name}">
+            <span>${item.name} x${item.qty}</span>
+            <span>${(item.price * item.qty).toLocaleString()} VNĐ</span>
+            <button onclick="removeFromCart('${item.name}')">Xóa</button>
+          </li>
+        `;
+      }).join('');
+      let voucherValue = appliedVoucher && total >= 300000 ? appliedVoucher.value : 0;
+      cartTotal.innerHTML = "Tổng tiền: " + (total - voucherValue).toLocaleString() + " VNĐ"
+        + (voucherValue ? ` <span style='color:#ad1457;'>(Đã giảm ${voucherValue.toLocaleString()} VNĐ)</span>` : "")
+        + `<br>Điểm tích lũy: ${getUserPoint().toLocaleString()} VNĐ`;
+    }
+
+    function updateCartIcon() {
+      const cartCount = document.getElementById('cartCount');
+      cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+    }
+
+    function searchProducts() {
+      const keyword = document.getElementById('searchInput').value.trim();
+      const type = document.getElementById('filterType').value;
+      const price = document.getElementById('filterPrice').value;
+      renderProducts(keyword, type, price);
+    }
+
+    function filterProducts() {
+      searchProducts();
+    }
+
+    function showDetail(productName) {
+      const product = products.find(p => p.name === productName);
+      const modal = document.getElementById('modal');
+      const modalContent = document.getElementById('modalContent');
+      const ratingArr = productRatings[product.name] || [];
+      const rating = ratingArr.length ? Math.round(ratingArr.reduce((a,b)=>a+b,0)/ratingArr.length) : 0;
+      const comments = productComments[product.name] || [];
+      const reviewImgs = productReviewImages[product.name] || [];
+      modalContent.innerHTML = `
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img src="${product.img}" alt="${product.name}">
+        <h2>${product.name}</h2>
+        <div style="color:#ff5722;font-weight:bold;">${product.price.toLocaleString()} VNĐ</div>
+        <div style="margin:8px 0;">${product.desc}</div>
+        <div>
+          <strong>Đánh giá: </strong>
+          ${[1,2,3,4,5].map(i => `<span class="star" onclick="rateProduct('${product.name}',${i})">${i <= rating ? "★" : "☆"}</span>`).join('')}
+          <span style="color:#ad1457;">(${ratingArr.length} lượt, trung bình ${rating}/5)</span>
+        </div>
+        <div style="margin:8px 0;">
+          <input type="text" id="commentInput" placeholder="Bình luận về sản phẩm..." style="width:70%;">
+          <input type="file" id="reviewImgInput" accept="image/*" style="width:25%;">
+          <button onclick="addComment('${product.name}')">Gửi</button>
+        </div>
+        <div>
+          <strong>Bình luận & hình ảnh:</strong>
+          <ul style="text-align:left;">
+            ${comments.map((c, idx) => `<li>${c}${reviewImgs[idx] ? `<br><img src="${reviewImgs[idx]}" style="width:80px;border-radius:8px;margin-top:4px;">` : ""}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+
+    function rateProduct(productName, rating) {
+      if (!productRatings[productName]) productRatings[productName] = [];
+      productRatings[productName].push(rating);
+      renderProducts();
+      showDetail(productName);
+      showToast("Cảm ơn bạn đã đánh giá!");
+    }
+
+    function addComment(productName) {
+      const input = document.getElementById('commentInput');
+      const value = input.value.trim();
+      const imgInput = document.getElementById('reviewImgInput');
+      if (!value && !imgInput.files.length) return;
+      if (!productComments[productName]) productComments[productName] = [];
+      productComments[productName].push(value || "(Không có bình luận)");
+      if (!productReviewImages[productName]) productReviewImages[productName] = [];
+      if (imgInput.files.length) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          productReviewImages[productName].push(e.target.result);
+          showDetail(productName);
+        };
+        reader.readAsDataURL(imgInput.files[0]);
+      } else {
+        productReviewImages[productName].push("");
+        showDetail(productName);
+      }
+      showToast("Đã gửi bình luận!");
+    }
+
+    function showService(service) {
+      document.getElementById('service4g').style.display = service === '4g' ? 'block' : 'none';
+      document.getElementById('serviceDoAn').style.display = service === 'doan' ? 'block' : 'none';
+    }
+    function hideService(service) {
+      if (service === '4g') {
+        document.getElementById('service4g').style.display = 'none';
+      } else if (service === 'doan') {
+        document.getElementById('serviceDoAn').style.display = 'none';
+      }
+    }
+
+    function dangKy4G() {
+      const soDT = document.getElementById('soDT').value.trim();
+      const ketQua4G = document.getElementById('ketQua4G');
+      if (!soDT.match(/^0\d{9}$/)) {
+        ketQua4G.textContent = "Vui lòng nhập số điện thoại hợp lệ!";
+        ketQua4G.style.color = "red";
+        return;
+      }
+      ketQua4G.textContent = "Đăng ký 4G thành công cho số: " + soDT;
+      ketQua4G.style.color = "#ad1457";
+    }
+
+    function datDoAn() {
+      const radios = document.querySelectorAll('input[name="doAn"]');
+      let doAn = "";
+      let price = 0;
+      radios.forEach(r => {
+        if (r.checked) {
+          doAn = r.value;
+          price = Number(r.getAttribute('data-price'));
+        }
+      });
+      const soLuong = parseInt(document.getElementById('soLuongDoAn').value, 10);
+      const diaChi = document.getElementById('diaChiDoAn').value.trim();
+      const ptThanhToan = document.getElementById('ptThanhToanDoAn').value;
+      const ketQuaDoAn = document.getElementById('ketQuaDoAn');
+
+      if (!doAn) {
+        ketQuaDoAn.textContent = "Vui lòng chọn món!";
+        ketQuaDoAn.style.color = "red";
+        return;
+      }
+      if (!soLuong || soLuong < 1) {
+        ketQuaDoAn.textContent = "Vui lòng nhập số lượng hợp lệ!";
+        ketQuaDoAn.style.color = "red";
+        return;
+      }
+      if (!diaChi) {
+        ketQuaDoAn.textContent = "Vui lòng nhập địa chỉ nhận món!";
+        ketQuaDoAn.style.color = "red";
+        return;
+      }
+      if (!ptThanhToan) {
+        ketQuaDoAn.textContent = "Vui lòng chọn phương thức thanh toán!";
+        ketQuaDoAn.style.color = "red";
+        return;
+      }
+      ketQuaDoAn.innerHTML = `
+        <span style="color:#ad1457;">
+          Bạn đã đặt <b>${soLuong}</b> <b>${doAn}</b> (${(price * soLuong).toLocaleString()}đ)
+          tới địa chỉ "<b>${diaChi}</b>" bằng phương thức "<b>${ptThanhToan}</b>".<br>
+          Đơn hàng sẽ được giao sớm!
+        </span>
+      `;
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.style.display = 'block';
+      setTimeout(() => { toast.style.display = 'none'; }, 3000);
+    }
+
+    // Nâng cấp lịch sử đơn hàng: hiển thị chi tiết từng đơn, trạng thái, nút đánh giá đơn hàng
+    function renderHistory() {
+      const user = users.find(u => u.username === loggedInUser);
+      const historyDiv = document.getElementById('history');
+      if (!user || !user.history || user.history.length === 0) {
+        historyDiv.style.display = 'none';
+        return;
+      }
+      historyDiv.style.display = 'block';
+      document.getElementById('historyList').innerHTML = user.history.map((h, idx) => {
+        // Trạng thái đơn hàng: mặc định là "Đã giao" nếu không có
+        let status = h.status || "Đã giao";
+        // Đánh giá đơn hàng
+        let reviewHtml = "";
+        if (!h.reviewed) {
+          reviewHtml = `<button onclick="reviewOrder(${idx})" style="background:#ff5722;color:#fff;border:none;border-radius:6px;padding:4px 12px;cursor:pointer;">Đánh giá đơn</button>`;
+        } else {
+          reviewHtml = `<span style="color:#ad1457;">Đã đánh giá: ${h.reviewScore || ""}/5</span>`;
+        }
+        return `
+          <li>
+            <div><b>Ngày:</b> ${h.date}</div>
+            <div><b>Sản phẩm:</b> ${h.items.map(i => `${i.name} x${i.qty}`).join(', ')}</div>
+            <div><b>Tổng tiền:</b> ${h.total.toLocaleString()} VNĐ</div>
+            <div><b>Địa chỉ:</b> ${h.address}</div>
+            <div><b>Vận chuyển:</b> ${h.shipping}</div>
+            <div><b>Trạng thái:</b> <span style="color:#ff5722;">${status}</span></div>
+            <div>${reviewHtml}</div>
+          </li>
+        `;
+      }).join('');
+    }
+
+    // Hàm đánh giá đơn hàng
+    function reviewOrder(idx) {
+      const user = users.find(u => u.username === loggedInUser);
+      let score = prompt("Đánh giá đơn hàng này (1-5):", "5");
+      score = Number(score);
+      if (isNaN(score) || score < 1 || score > 5) {
+        alert("Vui lòng nhập số từ 1 đến 5!");
+        return;
+      }
+      user.history[idx].reviewed = true;
+      user.history[idx].reviewScore = score;
+      renderHistory();
+      showToast("Cảm ơn bạn đã đánh giá đơn hàng!");
+    }
+
+    // Đa ngôn ngữ (chỉ demo cho một số text)
+    const LANGS = {
+      vi: {
+        login: "Đăng nhập",
+        register: "Tạo tài khoản",
+        username: "Tên tài khoản",
+        password: "Mật khẩu",
+        forgot: "Quên mật khẩu?",
+        send: "Gửi",
+        chatTitle: "Hỗ trợ trực tuyến",
+        chatPlaceholder: "Nhập câu hỏi...",
+        close: "Đóng",
+        address: "Nhập địa chỉ nhận hàng chi tiết (số nhà, phường, quận...)",
+        shipping: "Chọn phương thức vận chuyển (Nhanh/Tiết kiệm):",
+        checkoutSuccess: "Đặt hàng thành công!",
+        cartEmpty: "Giỏ hàng trống!",
+        notAddress: "Bạn chưa nhập địa chỉ!",
+        voucher: "Mã giảm giá",
+        apply: "Áp dụng",
+        selectVoucher: "Chọn mã giảm giá",
+        selectLang: "Ngôn ngữ"
+      },
+      en: {
+        login: "Login",
+        register: "Register",
+        username: "Username",
+        password: "Password",
+        forgot: "Forgot password?",
+        send: "Send",
+        chatTitle: "Live Support",
+        chatPlaceholder: "Type your question...",
+        close: "Close",
+        address: "Enter delivery address (street, ward, district...)",
+        shipping: "Choose shipping method (Fast/Economy):",
+        checkoutSuccess: "Order placed successfully!",
+        cartEmpty: "Cart is empty!",
+        notAddress: "You haven't entered address!",
+        voucher: "Voucher",
+        apply: "Apply",
+        selectVoucher: "Choose voucher",
+        selectLang: "Language"
+      }
+    };
+
+    // Thay đổi ngôn ngữ
+    function changeLang(lang) {
+      currentLang = lang;
+      document.getElementById('loginBtn').textContent = LANGS[lang].login;
+      document.getElementById('registerBtn').textContent = LANGS[lang].register;
+      document.getElementById('regUsernameLabel').textContent = LANGS[lang].username + ":";
+      document.getElementById('regPasswordLabel').textContent = LANGS[lang].password + ":";
+      document.getElementById('loginUsernameLabel').textContent = LANGS[lang].username + ":";
+      document.getElementById('loginPasswordLabel').textContent = LANGS[lang].password + ":";
+      document.getElementById('forgotLink').textContent = LANGS[lang].forgot;
+      document.getElementById('chatTitle').textContent = LANGS[lang].chatTitle;
+      document.getElementById('chatInput').placeholder = LANGS[lang].chatPlaceholder;
+      document.getElementById('closeChatBtn').textContent = LANGS[lang].close;
+      document.getElementById('voucherLabel').textContent = LANGS[lang].voucher + ":";
+      document.getElementById('applyVoucherBtn').textContent = LANGS[lang].apply;
+      document.getElementById('selectVoucherLabel').textContent = LANGS[lang].selectVoucher + ":";
+      document.getElementById('selectLangLabel').textContent = LANGS[lang].selectLang + ":";
+    }
+
+    // Quên mật khẩu
+    function showForgotModal() {
+      document.getElementById('forgotModal').style.display = 'flex';
+      forgotModalOpen = true;
+    }
+    function closeForgotModal() {
+      document.getElementById('forgotModal').style.display = 'none';
+      forgotModalOpen = false;
+    }
+    function sendForgot() {
+      const username = document.getElementById('forgotUsername').value.trim();
+      if (!username) {
+        alert("Vui lòng nhập tên tài khoản!");
+        return;
+      }
+      alert("Mật khẩu của bạn là: " + (users.find(u => u.username === username)?.password || "Không tìm thấy tài khoản!"));
+      closeForgotModal();
+    }
+
+    // Đổi mật khẩu
+    function showChangePassModal() {
+      document.getElementById('changePassModal').style.display = 'flex';
+    }
+    function closeChangePassModal() {
+      document.getElementById('changePassModal').style.display = 'none';
+    }
+    function sendChangePass() {
+      const oldPass = document.getElementById('oldPass').value;
+      const newPass = document.getElementById('newPass').value;
+      const user = users.find(u => u.username === loggedInUser);
+      if (!oldPass || !newPass) {
+        alert("Vui lòng nhập đủ thông tin!");
+        return;
+      }
+      if (user.password !== oldPass) {
+        alert("Mật khẩu cũ không đúng!");
+        return;
+      }
+      user.password = newPass;
+      alert("Đổi mật khẩu thành công!");
+      closeChangePassModal();
+    }
+
+    // Áp dụng voucher
+    let appliedVoucher = null;
+    function applyVoucher() {
+      const code = document.getElementById('voucherSelect').value;
+      appliedVoucher = vouchers.find(v => v.code === code);
+      showToast("Áp dụng mã giảm giá: " + (appliedVoucher?.code || ""));
+      renderCart();
+    }
+
+    // Tích điểm
+    function getUserPoint() {
+      const user = users.find(u => u.username === loggedInUser);
+      return user?.history?.reduce((sum, h) => sum + h.total, 0) || 0;
+    }
+
+    // Quản lý kho (số lượng tồn)
+    let stock = {
+      "Son môi": 10,
+      "Kem dưỡng": 8,
+      "Mặt nạ": 20,
+      "Phấn phủ": 5,
+      "Sữa rửa mặt": 12,
+      "Tẩy trang": 7,
+      "Kem chống nắng": 6,
+      "Serum": 9
+    };
+
+    // Bản đồ chọn địa chỉ
+    function showMapBox() {
+      document.getElementById('mapBox').style.display = 'block';
+    }
+    function hideMapBox() {
+      document.getElementById('mapBox').style.display = 'none';
+    }
+
+    // Chat hỗ trợ
+    function toggleChat() {
+      const chatBox = document.getElementById('chatBox');
+      chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex';
+      renderChat();
+    }
+
+    function sendChat() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+      saveChatHistory(loggedInUser, { sender: "user", text });
+      const reply = chatbotReply(text);
+      saveChatHistory(loggedInUser, { sender: "shop", text: reply });
+      input.value = "";
+      renderChat();
+    }
+
+    function renderChat() {
+      const chatMessages = document.getElementById('chatMessages');
+      const history = getChatHistory(loggedInUser);
+      chatMessages.innerHTML = history.map(c => `<div><b>${c.sender === "shop" ? "Shop" : "Bạn"}:</b> ${c.text}</div>`).join('');
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Lưu lịch sử chat cho từng tài khoản
+    function saveChatHistory(username, msg) {
+      if (!username) return;
+      if (!window.allChatHistory) window.allChatHistory = {};
+      if (!window.allChatHistory[username]) window.allChatHistory[username] = [];
+      window.allChatHistory[username].push(msg);
+    }
+    function getChatHistory(username) {
+      if (!window.allChatHistory) window.allChatHistory = {};
+      if (!window.allChatHistory[username]) window.allChatHistory[username] = [
+        { sender: "shop", text: "Xin chào! Bạn cần hỗ trợ gì?" }
+      ];
+      return window.allChatHistory[username];
+    }
+
+    // Chatbot tự động trả lời
+    function chatbotReply(text) {
+      text = text.toLowerCase();
+      if (text.includes("giá") || text.includes("bao nhiêu")) return "Bạn vui lòng xem giá từng sản phẩm trên website nhé!";
+      if (text.includes("khuyến mãi") || text.includes("sale")) return "Shop đang có chương trình SALE50 và FREESHIP, bạn nhập mã khi thanh toán nhé!";
+      if (text.includes("giao hàng") || text.includes("ship")) return "Shop giao hàng toàn quốc, bạn nhập địa chỉ khi đặt hàng nhé!";
+      if (text.includes("đặt đồ ăn")) return "Bạn vào mục Đặt đồ ăn để chọn món và đặt nhé!";
+      if (text.includes("đăng nhập") || text.includes("tài khoản")) return "Nếu bạn chưa có tài khoản, hãy đăng ký mới nhé!";
+      if (text.includes("mỹ phẩm")) return "Shop có nhiều loại mỹ phẩm chính hãng, bạn xem danh mục sản phẩm nhé!";
+      if (text.includes("cảm ơn")) return "Shop cảm ơn bạn đã quan tâm!";
+      return "Shop đã nhận câu hỏi: " + text;
+    }
+
+    // Khởi tạo sản phẩm khi đăng nhập
+    if (loggedInUser) {
+      renderProducts();
+      renderCart();
+      renderHistory();
+      updateCartIcon();
+    }
+    showBanner();
+    changeLang("vi");
+
+    // Bản đồ Google Maps
+    function showMap() {
+      const addr = document.getElementById('mapAddress').value.trim();
+      if (!addr) return;
+      document.getElementById('mapFrame').src = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodeURIComponent(addr)}`;
+    }
+
+    // Hàm hiển thị thông báo realtime
+    function showNotification(msg, timeout = 5000) {
+      document.getElementById('notificationMsg').textContent = msg;
+      document.getElementById('notificationBar').style.display = 'block';
+      if (timeout > 0) {
+        setTimeout(hideNotification, timeout);
+      }
+    }
+    function hideNotification() {
+      document.getElementById('notificationBar').style.display = 'none';
+    }
+
+    // Thông báo khuyến mãi khi đăng nhập
+    function showBanner() {
+      document.getElementById('banner').style.background = "url('https://cf.shopee.vn/file/vn-50009109-7e4e2b6e7b6e7b6e7b6e7b6e7b6e7b6e') center/cover no-repeat";
+      document.getElementById('banner').innerHTML = "<span>Mỹ phẩm chính hãng - Khuyến mãi HOT! SALE50 - FREESHIP</span>";
+      showNotification("🎉 Đang có khuyến mãi SALE50 và FREESHIP! Nhập mã khi thanh toán để nhận ưu đãi.", 7000);
+    }
+
+    // Thông báo trạng thái đơn hàng khi đặt hàng
+    function checkout() {
+      if (cart.length === 0) {
+        showToast(LANGS[currentLang].cartEmpty);
+        return;
+      }
+      let address = prompt(LANGS[currentLang].address, "");
+      if (!address) {
+        showToast(LANGS[currentLang].notAddress);
+        return;
+      }
+      showMapBox();
+      let shipping = prompt(LANGS[currentLang].shipping, "Nhanh");
+      if (!shipping) shipping = "Nhanh";
+      let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+      let voucherValue = appliedVoucher && total >= 300000 ? appliedVoucher.value : 0;
+      total = total - voucherValue;
+      const user = users.find(u => u.username === loggedInUser);
+      const now = new Date();
+      user.history = user.history || [];
+      user.history.push({
+        date: now.toLocaleString(),
+        items: cart.map(i => ({ name: i.name, qty: i.qty })),
+        total,
+        address,
+        shipping,
+        status: "Đang xử lý"
+      });
+      renderHistory();
+      cart = [];
+      renderCart();
+      updateCartIcon();
+      showToast(LANGS[currentLang].checkoutSuccess);
+      hideMapBox();
+      showNotification("🛒 Đơn hàng của bạn đã được tạo! Shop sẽ xác nhận và giao hàng sớm.", 7000);
+
+      // Giả lập cập nhật trạng thái đơn hàng sau 5 giây
+      setTimeout(() => {
+        const lastOrder = user.history[user.history.length - 1];
+        if (lastOrder) {
+          lastOrder.status = "Đã giao";
+          renderHistory();
+          showNotification("✅ Đơn hàng của bạn đã được giao thành công!", 7000);
+        }
+      }, 5000);
+    }
+  </script>
+</head>
+<body>
+  <div class="navbar">
+    <h1><i class="fa-solid fa-bag-shopping"></i> Shopee Mỹ Phẩm</h1>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm...">
+      <button id="searchBtn" onclick="searchProducts()"><i class="fa fa-search"></i></button>
+      <select id="filterType" onchange="filterProducts()">
+        <option value="">Tất cả loại</option>
+        <option value="Trang điểm">Trang điểm</option>
+        <option value="Chăm sóc da">Chăm sóc da</option>
+      </select>
+      <select id="filterPrice" onchange="filterProducts()">
+        <option value="">Tất cả giá</option>
+        <option value="1">Dưới 100.000</option>
+        <option value="2">100.000 - 200.000</option>
+        <option value="3">Trên 200.000</option>
+      </select>
+    </div>
+    <div class="user" id="welcome"></div>
+    <div class="cart-icon" onclick="document.getElementById('mainContent').scrollIntoView({behavior:'smooth'})">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span class="cart-count" id="cartCount">0</span>
+    </div>
+  </div>
+  <div class="container">
+    <div class="banner" id="banner"><span>Mỹ phẩm chính hãng - Khuyến mãi HOT!</span></div>
+    <div class="voucher-bar">
+      <label id="voucherLabel" for="voucherSelect">Mã giảm giá:</label>
+      <select id="voucherSelect">
+        <option value="">--Chọn mã--</option>
+        <option value="SALE50">SALE50 - Giảm 50.000 cho đơn từ 300.000</option>
+        <option value="FREESHIP">FREESHIP - Giảm 20.000 phí ship</option>
+      </select>
+      <button id="applyVoucherBtn" onclick="applyVoucher()">Áp dụng</button>
+    </div>
+    <div id="userInfo">
+      <img id="infoAvatar" src="" alt="Avatar" style="display:none;">
+      <h3>Thông tin tài khoản</h3>
+      <p><strong>Tên đăng nhập:</strong> <span id="infoUsername"></span></p>
+      <form id="bgForm">
+        <label for="bgInput">Chọn ảnh nền cho tài khoản:</label>
+        <input type="file" id="bgInput" accept="image/*" onchange="updateBg(event)">
+      </form>
+      <form id="avatarForm">
+        <label for="avatarInput">Chọn ảnh đại diện:</label>
+        <input type="file" id="avatarInput" accept="image/*" onchange="updateAvatar(event)">
+      </form>
+      <button onclick="showChangePassModal()">Đổi mật khẩu</button>
+    </div>
+    <div id="loginForm">
+      <div style="text-align:center;margin-bottom:16px;">
+        <img src="https://cdn.pixabay.com/photo/2017/01/06/19/15/pig-1956159_1280.png" alt="Heo Shopee" style="width:100px;height:100px;border-radius:50%;box-shadow:0 2px 8px #d6338440;">
+      </div>
+      <h2 id="loginTitle" style="text-align:center;">Đăng nhập</h2>
+      <label id="loginUsernameLabel" for="loginUsername">Tên tài khoản:</label>
+      <input type="text" id="loginUsername" placeholder="Nhập tên tài khoản"><br>
+      <label id="loginPasswordLabel" for="loginPassword">Mật khẩu:</label>
+      <input type="password" id="loginPassword" placeholder="Nhập mật khẩu"><br>
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:16px;">
+        <button id="loginBtn" onclick="loginAccount()">Đăng nhập</button>
+        <button type="button" onclick="showRegister()">Tạo tài khoản</button>
+      </div>
+    </div>
+    <div id="registerForm" style="display:none;">
+      <div style="text-align:center;margin-bottom:16px;">
+        <img src="https://cdn.pixabay.com/photo/2017/01/06/19/15/pig-1956159_1280.png" alt="Heo Shopee" style="width:100px;height:100px;border-radius:50%;box-shadow:0 2px 8px #d6338440;">
+      </div>
+      <h2 id="registerTitle" style="text-align:center;">Tạo tài khoản</h2>
+      <label id="regUsernameLabel" for="regUsername">Tên tài khoản:</label>
+      <input type="text" id="regUsername" placeholder="Nhập tên tài khoản"><br>
+      <label id="regPasswordLabel" for="regPassword">Mật khẩu:</label>
+      <input type="password" id="regPassword" placeholder="Nhập mật khẩu"><br>
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:16px;">
+        <button id="registerBtn" onclick="registerAccount()">Đăng ký</button>
+        <button type="button" onclick="showLogin()">Đăng nhập</button>
+      </div>
+    </div>
+    <div id="mainContent" style="display:none;">
+      <div class="filter-bar">
+        <input type="text" id="searchInput2" placeholder="Tìm kiếm sản phẩm..." oninput="searchProducts()">
+        <select id="filterType2" onchange="filterProducts()">
+          <option value="">Tất cả loại</option>
+          <option value="Trang điểm">Trang điểm</option>
+          <option value="Chăm sóc da">Chăm sóc da</option>
+        </select>
+        <select id="filterPrice2" onchange="filterProducts()">
+          <option value="">Tất cả giá</option>
+          <option value="1">Dưới 100.000</option>
+          <option value="2">100.000 - 200.000</option>
+          <option value="3">Trên 200.000</option>
+        </select>
+      </div>
+      <div class="product-list" id="productList"></div>
+      <div class="cart">
+        <h2>Giỏ hàng</h2>
+        <ul class="cart-list" id="cartList"></ul>
+        <div class="cart-total" id="cartTotal"></div>
+        <button onclick="checkout()">Thanh toán</button>
+      </div>
+      <div class="history" id="history" style="display:none;">
+        <h2>Lịch sử đơn hàng</h2>
+        <ul class="history-list" id="historyList"></ul>
+      </div>
+      <div class="service-btns">
+        <button onclick="showService('4g')">Đăng ký 4G</button>
+        <button onclick="showService('doan')">Đặt đồ ăn</button>
+        <button onclick="showFavorites()" style="background:#ffcc00;color:#ad1457;"><i class="fa fa-heart"></i> Sản phẩm yêu thích</button>
+      </div>
+      <div id="service4g" class="service-form" style="display:none;">
+        <form onsubmit="event.preventDefault(); dangKy4G();">
+          <label for="soDT">Nhập số điện thoại để đăng ký 4G:</label>
+          <input type="text" id="soDT" placeholder="Số điện thoại">
+          <button type="submit">Đăng ký 4G</button>
+          <div id="ketQua4G"></div>
+          <button type="button" onclick="hideService('4g')">Đóng</button>
+        </form>
+      </div>
+      <div id="serviceDoAn" class="service-form" style="display:none;">
+        <form id="formDoAn" onsubmit="event.preventDefault(); datDoAn();">
+          <label for="doAn">Chọn món ăn:</label>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+            <div style="text-align:center;">
+              <img src="https://cdn.pixabay.com/photo/2017/01/22/19/20/tea-1996029_1280.jpg" alt="Trà sữa" style="width:60px;height:60px;border-radius:8px;">
+              <br>
+              <input type="radio" name="doAn" id="doAn1" value="Trà sữa" data-price="35000">
+              <label for="doAn1">Trà sữa<br><span style="color:#ff5722;">35.000đ</span></label>
+            </div>
+            <div style="text-align:center;">
+              <img src="https://cdn.pixabay.com/photo/2016/03/05/19/02/bread-1239266_1280.jpg" alt="Bánh mì" style="width:60px;height:60px;border-radius:8px;">
+              <br>
+              <input type="radio" name="doAn" id="doAn2" value="Bánh mì" data-price="25000">
+              <label for="doAn2">Bánh mì<br><span style="color:#ff5722;">25.000đ</span></label>
+            </div>
+            <div style="text-align:center;">
+              <img src="https://cdn.pixabay.com/photo/2017/07/16/10/43/rice-2502272_1280.jpg" alt="Cơm tấm" style="width:60px;height:60px;border-radius:8px;">
+              <br>
+              <input type="radio" name="doAn" id="doAn3" value="Cơm tấm" data-price="40000">
+              <label for="doAn3">Cơm tấm<br><span style="color:#ff5722;">40.000đ</span></label>
+            </div>
+            <div style="text-align:center;">
+              <img src="https://cdn.pixabay.com/photo/2017/06/02/18/24/noodle-2366648_1280.jpg" alt="Phở" style="width:60px;height:60px;border-radius:8px;">
+              <br>
+              <input type="radio" name="doAn" id="doAn4" value="Phở" data-price="45000">
+              <label for="doAn4">Phở<br><span style="color:#ff5722;">45.000đ</span></label>
+            </div>
+            <div style="text-align:center;">
+              <img src="https://cdn.pixabay.com/photo/2017/06/02/18/24/chicken-2366647_1280.jpg" alt="Gà rán" style="width:60px;height:60px;border-radius:8px;">
+              <br>
+              <input type="radio" name="doAn" id="doAn5" value="Gà rán" data-price="50000">
+              <label for="doAn5">Gà rán<br><span style="color:#ff5722;">50.000đ</span></label>
+            </div>
+            <div style="text-align:center;">
+              <img src="https://cdn.pixabay.com/photo/2017/06/02/18/24/pizza-2366649_1280.jpg" alt="Pizza" style="width:60px;height:60px;border-radius:8px;">
+              <br>
+              <input type="radio" name="doAn" id="doAn6" value="Pizza" data-price="65000">
+              <label for="doAn6">Pizza<br><span style="color:#ff5722;">65.000đ</span></label>
+            </div>
+          </div>
+          <label for="soLuongDoAn">Số lượng:</label>
+          <input type="number" id="soLuongDoAn" min="1" value="1" required>
+          <label for="diaChiDoAn">Địa chỉ nhận món:</label>
+          <input type="text" id="diaChiDoAn" placeholder="Nhập địa chỉ nhận món" required>
+          <label for="ptThanhToanDoAn">Phương thức thanh toán:</label>
+          <select id="ptThanhToanDoAn" required>
+            <option value="">-- Chọn phương thức --</option>
+            <option value="Tiền mặt">Tiền mặt</option>
+            <option value="Chuyển khoản">Chuyển khoản</option>
+            <option value="Ví điện tử">Ví điện tử</option>
+          </select>
+          <div style="margin:12px 0;">
+            <strong>Tổng tiền: <span id="tongTienDoAn" style="color:#ff5722;">0đ</span></strong>
+          </div>
+          <button type="submit">Đặt món</button>
+          <div id="ketQuaDoAn"></div>
+          <button type="button" onclick="hideService('doan')">Đóng</button>
+        </form>
+      </div>
+      <div class="map-box" id="mapBox" style="display:none;">
+        <input type="text" id="mapAddress" placeholder="Nhập địa chỉ để xem bản đồ">
+        <button onclick="showMap()">Xem bản đồ</button>
+        <iframe id="mapFrame" src="" frameborder="0"></iframe>
+        <button onclick="hideMapBox()">Đóng bản đồ</button>
+      </div>
+    </div>
+    <div id="toast" class="toast"></div>
+    <div id="modal" class="modal">
+      <div class="modal-content" id="modalContent"></div>
+    </div>
+    <!-- Quên mật khẩu -->
+    <div id="forgotModal" class="modal-small">
+      <div class="modal-small-content">
+        <span class="close-modal-small" onclick="closeForgotModal()">&times;</span>
+        <h3>Quên mật khẩu</h3>
+        <input type="text" id="forgotUsername" placeholder="Nhập tên tài khoản">
+        <button onclick="sendForgot()">Gửi</button>
+      </div>
+    </div>
+    <!-- Đổi mật khẩu -->
+    <div id="changePassModal" class="modal-small">
+      <div class="modal-small-content">
+        <span class="close-modal-small" onclick="closeChangePassModal()">&times;</span>
+        <h3>Đổi mật khẩu</h3>
+        <input type="password" id="oldPass" placeholder="Mật khẩu cũ">
+        <input type="password" id="newPass" placeholder="Mật khẩu mới">
+        <button onclick="sendChangePass()">Đổi mật khẩu</button>
+      </div>
+    </div>
+    <!-- Chat hỗ trợ -->
+    <div class="chat-toggle" onclick="toggleChat()">💬</div>
+    <div class="chat-box" id="chatBox">
+      <div class="chat-header" id="chatTitle">Hỗ trợ trực tuyến</div>
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="Nhập câu hỏi...">
+        <button onclick="sendChat()">Gửi</button>
+        <button id="closeChatBtn" onclick="toggleChat()">Đóng</button>
+      </div>
+    </div>
+    <!-- Danh sách yêu thích -->
+    <div id="favoritesModal" class="modal">
+      <div class="modal-content" id="favoritesContent"></div>
+    </div>
+    <!-- Thêm thông báo realtime khi có khuyến mãi hoặc đơn hàng thay đổi trạng thái -->
+    <div id="notificationBar" style="display:none;position:fixed;top:0;left:0;width:100%;z-index:99999;background:#ffcc00;color:#ad1457;text-align:center;padding:12px;font-weight:bold;box-shadow:0 2px 8px #d6338440;">
+      <span id="notificationMsg"></span>
+      <button onclick="hideNotification()" style="margin-left:16px;background:#d63384;color:#fff;border:none;border-radius:6px;padding:4px 12px;cursor:pointer;">Đóng</button>
+    </div>
+  </div>
+</body>
+</html>
